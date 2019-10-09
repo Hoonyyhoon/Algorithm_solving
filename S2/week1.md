@@ -58,3 +58,31 @@ class Solution {
   }
 };
 ```
+
+
+## Q1. Product of Array Except Self([Link](https://leetcode.com/problems/product-of-array-except-self/)) (:o:)
+
+- Time: O(N)
+- Space: O(1)
+- Note <br/> 
+```cpp
+class Solution {
+ public:
+  vector<int> productExceptSelf(vector<int>& nums) {
+    int size = nums.size();
+    std::vector<int> ret(size, 1);
+    int f = nums.front();
+    int b = nums.back();
+
+    for (int i = 1; i < size; i++) {
+      int j = size - 1 - i;
+      ret[i] *= f;
+      ret[j] *= b;
+      f *= nums[i];
+      b *= nums[j];
+    }
+
+    return ret;
+  }
+};
+```
