@@ -60,7 +60,7 @@ class Solution {
 ```
 
 
-## Q1. Product of Array Except Self([Link](https://leetcode.com/problems/product-of-array-except-self/)) (:o:)
+## Q2. Product of Array Except Self([Link](https://leetcode.com/problems/product-of-array-except-self/)) (:o:)
 
 - Time: O(N)
 - Space: O(1)
@@ -83,6 +83,83 @@ class Solution {
     }
 
     return ret;
+  }
+};
+```
+
+## Q3. Game of Life([Link](https://leetcode.com/problems/game-of-life/)) (:heavy_check_mark:)
+- Time: O(MN)
+- Space: O(1)
+- Note <br/> 1) How can we modify saving rules to express multiple states to realize inplace? <br/> *) Don't forget the procedure! (**modify** -> calculate -> modify)
+```cpp
+class Solution {
+ public:
+  void Nextstate(vector<vector<int>>& cur, int r, int c) {
+    int current_state = 0;
+    if (cur[r][c] >= 2) current_state = 1;
+    int liv_cnt = 0; 
+
+    for (int i = r - 1; i <= r + 1; i++) {
+      if (i < 0)
+        continue;
+      else if (i > cur.size() - 1)
+        break;
+      for (int j = c - 1; j <= c + 1; j++) {
+        if (j < 0)
+          continue;
+        else if (j > cur.front().size() - 1)
+          break;
+        if (cur[i][j] >= 2) liv_cnt++;
+      }
+    }
+
+    if (current_state == 1) {
+      liv_cnt--;
+      if (liv_cnt < 2)
+        cur[r][c] = 2;
+      else if (liv_cnt <= 3)
+        cur[r][c] = 3;
+      else
+        cur[r][c] = 2;
+    } else {
+      if (liv_cnt == 3)
+        cur[r][c] = 1;
+      else
+        cur[r][c] = 0;
+    }
+  }
+
+  void gameOfLife(vector<vector<int>>& board) {
+    if (board.empty()) return;
+
+    int m = board.size();          
+    int n = board.front().size();
+
+    for (int r = 0; r < m; r++) {
+      for (int c = 0; c < n; c++) {
+        if (board[r][c] == 1) board[r][c] = 3;
+      }
+    }
+
+    for (int r = 0; r < m; r++) {
+      if (r < 0)
+        continue;
+      else if (r > m - 1)
+        break;
+      for (int c = 0; c < n; c++) {
+        if (c < 0)
+          continue;
+        else if (c > n - 1)
+          break;
+        Nextstate(board, r, c);
+      }
+    }
+
+    for (int r = 0; r < m; r++) {
+      for (int c = 0; c < n; c++) {
+        board[r][c] %= 2;
+      }
+    }
   }
 };
 ```
