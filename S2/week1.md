@@ -4,7 +4,7 @@
 
 - Time: O(NlogN)
 - Space: O(N)
-- Note <br/> 1) std::stable_sort vs std::sort? <br/> 2) String compares with relational operators([Link](https://stackoverflow.com/questions/34540790/string-comparisons-with-relational-operators-differing-lengths))
+- Note <br/>
 ```cpp
 class Solution {
  public:
@@ -58,13 +58,13 @@ class Solution {
   }
 };
 ```
-
+- Check <br/> 1) std::stable_sort vs std::sort? <br/> 2) String compares with relational operators([Link](https://stackoverflow.com/questions/34540790/string-comparisons-with-relational-operators-differing-lengths))
 
 ## Q2. Product of Array Except Self([Link](https://leetcode.com/problems/product-of-array-except-self/)) (:o:)
 
 - Time: O(N)
 - Space: O(1)
-- Note <br/> 
+- Note <br/> Don't use divide operator
 ```cpp
 class Solution {
  public:
@@ -86,11 +86,11 @@ class Solution {
   }
 };
 ```
-
+- Check <br/> 1) What do we change while iterating?
 ## Q3. Game of Life([Link](https://leetcode.com/problems/game-of-life/)) (:heavy_check_mark:)
 - Time: O(MN)
 - Space: O(1)
-- Note <br/> 1) How can we modify saving rules to express multiple states to realize inplace? <br/> *) Don't forget the procedure! (**modify** -> calculate -> modify)
+- Note <br/> What do we need to implement inplace?
 ```cpp
 class Solution {
  public:
@@ -163,3 +163,4 @@ class Solution {
   }
 };
 ```
+- Check <br/> 1) How do we change saving rules to express multiple states in order to realize inplace? <br/> 2) Don't forget the procedure! (**modify** -> calculate -> modify)
