@@ -164,3 +164,31 @@ class Solution {
 };
 ```
 - Check <br/> 1) How do we change saving rules to express multiple states in order to realize inplace? <br/> 2) Don't forget the procedure! (**modify** -> calculate -> modify)
+
+## Q4. Generate Parentheses([Link](https://leetcode.com/problems/generate-parentheses/)) (:heavy_check_mark:)
+- Time: O(MN)
+- Space: O(1)
+- Note <br/>
+```cpp
+class Solution {
+ public:
+  void AddString(vector<string>& ret, 
+                 string cur, int n,
+                 int pos_used, int neg_used) {
+    if (2 * n > cur.size()) {
+      if (n > pos_used) AddString(ret, cur + '(', n, pos_used + 1, neg_used);
+      if (pos_used > neg_used) AddString(ret, cur + ')', n, pos_used, neg_used + 1);
+    } else {
+      ret.push_back(cur);
+    }
+  }
+
+  vector<string> generateParenthesis(int n) {
+    vector<string> ret;
+    AddString(ret, "(", n, 1, 0);
+    return ret;
+  }
+};
+```
+- Check <br/> 1) Come up with the idea recursive or DFS + how to implement it?
+<br/> 2) How do you derive time complexity?
