@@ -166,8 +166,8 @@ class Solution {
 - Check <br/> 1) How do we change saving rules to express multiple states in order to realize inplace? <br/> 2) Don't forget the procedure! (**modify** -> calculate -> modify)
 
 ## Q4. Generate Parentheses([Link](https://leetcode.com/problems/generate-parentheses/)) (:heavy_check_mark:)
-- Time: O(MN)
-- Space: O(1)
+- Time: O(2^(2N)/sqrt(N))
+- Space: O(2^(2N)/sqrt(N))
 - Note <br/>
 ```cpp
 class Solution {
