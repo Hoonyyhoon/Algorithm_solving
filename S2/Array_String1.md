@@ -1,4 +1,4 @@
-# Week 1: Array and String
+# Array and String 1
 
 ## Q1. Reorder Data in LogFiles([Link](https://leetcode.com/problems/reorder-data-in-log-files/)) (:heavy_check_mark:)
 
