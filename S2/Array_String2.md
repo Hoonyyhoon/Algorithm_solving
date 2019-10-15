@@ -34,3 +34,33 @@ class Solution {
 };
 ```
 - Check <br/> 1) Try to solve using queue <br/> 2) [Space-complexity](https://cs.stackexchange.com/questions/83574/does-space-complexity-analysis-usually-include-output-space)
+
+## Q2. First Missing Positive([Link](https://leetcode.com/problems/first-missing-positive/)) (:x:)
+
+- Time: O(N)
+- Space: O(1)
+- Note <br/> Run within O(N) with constant space(O(1))
+```cpp
+class Solution {
+ public:
+  int firstMissingPositive(vector<int>& nums) {
+    int last_nonneg = nums.size() - 1;
+    for (int i = 0; (i < nums.size()) && (i < last_nonneg); i++)
+      if (nums[i] <= 0) std::swap(nums[i], nums[last_nonneg--]);
+
+    int N = last_nonneg + 1;
+    for (int i = 0; i < N; i++) {
+      int val = nums[i];
+      while (val > 0 && val <= N && val != nums[val - 1]) {
+        std::swap(nums[val - 1], nums[i]);
+        val = nums[i];
+      }
+    }
+
+    for (int i = 0; i < N; i++)
+      if (nums[i] != i + 1) return i + 1;
+    return N + 1;
+  }
+};
+```
+- Check <br/> How will you catch the hint condition for the solution?(answer will be ranging from [1, # of positive number in array+1]) 
