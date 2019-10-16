@@ -64,3 +64,47 @@ class Solution {
 };
 ```
 - Check <br/> How will you catch the hint condition for the solution?(answer will be ranging from [1, # of positive number in array+1]) 
+
+## Q2. Spiral Matrix([Link](https://leetcode.com/problems/spiral-matrix/)) (:o:)
+
+- Time: O(N*M)
+- Space: O(N*M)
+- Note <br/>
+```cpp
+class Solution {
+ public:
+  vector<int> spiralOrder(vector<vector<int>>& matrix) {
+    vector<int> res;
+
+    if (matrix.empty() || matrix.front().empty()) return res;
+
+    // right down left up
+    int left = -1;  // for concise
+    int up = 0;
+    int down = matrix.size();
+    int right = matrix.front().size();
+    int total_size = (down--) * (right--);
+    res.reserve(total_size);
+    while (left <= right && up <= down) {
+      // go right
+      for (int h = ++left; h <= right; h++) res.push_back(matrix[up][h]);
+      // touch right, up
+      if (res.size() == total_size) break;
+      // go down
+      for (int v = ++up; v <= down; v++) res.push_back(matrix[v][right]);
+      // touch right, bottom
+      if (res.size() == total_size) break;
+      // go left
+      for (int h = --right; h >= left; h--) res.push_back(matrix[down][h]);
+      // touch left, down
+      if (res.size() == total_size) break;
+      // go up
+      for (int v = --down; v >= up; v--) res.push_back(matrix[v][left]);
+      // touch left, up
+      if (res.size() == total_size) break;
+    }
+    return res;
+  }
+};
+```
+- Check <br/> Any way to reduce if condition?
