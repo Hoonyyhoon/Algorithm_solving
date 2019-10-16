@@ -68,7 +68,7 @@ class Solution {
 ## Q2. Spiral Matrix([Link](https://leetcode.com/problems/spiral-matrix/)) (:o:)
 
 - Time: O(N*M)
-- Space: O(N*M)
+- Space: O(1) // ignoring return vector
 - Note <br/>
 ```cpp
 class Solution {
