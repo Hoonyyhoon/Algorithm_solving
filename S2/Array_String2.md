@@ -1,4 +1,4 @@
-# Array and String 1
+# Array and String 2
 
 ## Q1. Letter Combinations of a Phone Number([Link](https://leetcode.com/problems/letter-combinations-of-a-phone-number/)) (:o:)
 
@@ -111,7 +111,7 @@ class Solution {
 
 ## Q4. Word Search([Link](https://leetcode.com/problems/word-search/)) (:heavy_check_mark:)
 - Time: O(H*W*4^(S-1)) // H: height, W: width, S: length of word
-- Space: O(1)
+- Space: O(S)
 - Note <br/>
 ```cpp
 std::pair<int, int> operator+(const std::pair<int, int>& a,
@@ -163,4 +163,6 @@ class Solution {
   }
 };
 ```
-- Check <br/> How will you come up with idea "mark and recover"?
+- Check <br/> 1) How will you come up with idea "mark and recover"?
+<br/> 2) Space complexity for recursion function call([Link](https://stackoverflow.com/questions/43298938/space-complexity-of-recursive-function))
+
