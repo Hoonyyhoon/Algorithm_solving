@@ -65,7 +65,7 @@ class Solution {
 ```
 - Check <br/> How will you catch the hint condition for the solution?(answer will be ranging from [1, # of positive number in array+1]) 
 
-## Q2. Spiral Matrix([Link](https://leetcode.com/problems/spiral-matrix/)) (:o:)
+## Q3. Spiral Matrix([Link](https://leetcode.com/problems/spiral-matrix/)) (:o:)
 
 - Time: O(N*M)
 - Space: O(1) // ignoring return vector
@@ -108,3 +108,59 @@ class Solution {
 };
 ```
 - Check <br/> Any way to reduce if condition?
+
+## Q4. Word Search([Link](https://leetcode.com/problems/word-search/)) (:heavy_check_mark:)
+- Time: O(H*W*4^(S-1)) // H: height, W: width, S: length of word
+- Space: O(1)
+- Note <br/>
+```cpp
+std::pair<int, int> operator+(const std::pair<int, int>& a,
+                              const std::pair<int, int>& b) {
+  return std::pair<int, int>(a.first + b.first, a.second + b.second);
+}
+
+const std::vector<std::pair<int, int>> dir{
+    std::pair<int, int>(0, 1), std::pair<int, int>(1, 0),
+    std::pair<int, int>(0, -1), std::pair<int, int>(-1, 0)};
+
+class Solution {
+ public:
+  bool exist(vector<vector<char>>& board, string word) {
+    if (board.empty() || board.front().empty()) return false;
+    if (word.empty()) return true;
+    if (board.front().size() * board.size() < word.size()) return false;
+
+    bool sol = false;
+    for (int h = 0; h < board.size(); h++) {
+      for (int w = 0; w < board.front().size(); w++) {
+        std::pair<int, int> pos(h, w);
+        if (RecursiveSearch(board, word, pos, 0)) return true;
+      }
+    }
+    return false;
+  }
+
+  bool RecursiveSearch(vector<vector<char>>& board, const string& word,
+                       const std::pair<int, int>& pos, const int str_idx) {
+    int h = pos.first;
+    int w = pos.second;
+    if (h < 0 || h > board.size() - 1 || w < 0 ||
+        w > board.front().size() - 1 || board[h][w] == '0')
+      return false;
+    if (board[h][w] == word[str_idx]) {
+      if (str_idx == word.size() - 1) {
+        return true;
+      }
+      char temp = board[h][w];
+      board[h][w] = '0';
+      bool sol = false;
+      for (auto& it : dir)
+        sol = sol || RecursiveSearch(board, word, pos + it, str_idx + 1);
+      board[h][w] = temp;
+      return sol;
+    } else
+      return false;
+  }
+};
+```
+- Check <br/> How will you come up with idea "mark and recover"?
