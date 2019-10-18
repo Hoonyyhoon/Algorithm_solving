@@ -199,4 +199,4 @@ class Solution {
   }
 };
 ```
-- Check <br/> 1) How will you end up to think "reversely"?
+- Check <br/> 1) How will you end up thinking "reversely"?
