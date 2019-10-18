@@ -166,3 +166,37 @@ class Solution {
 - Check <br/> 1) How will you come up with idea "mark and recover"?
 <br/> 2) Space complexity for recursion function call([Link](https://stackoverflow.com/questions/43298938/space-complexity-of-recursive-function))
 
+## Q5 Move Zeroes([Link](https://leetcode.com/problems/move-zeroes/)) (:o:)
+- Time: O(N)
+- Space: O(1)
+- Note <br/>
+```cpp
+class Solution {
+public:
+    void moveZeroes1(vector<int>& nums) {
+      int rm_nz = 0;  // right-most non-zero
+      int lm_z = 0; // left-most zero
+      for(int i = 0; i < nums.size(); i++) {
+        if(nums[lm_z] == 0) {
+          if(rm_nz<lm_z) rm_nz = lm_z;  // rm_nz cannot be smaller than lm_z
+          while(nums[rm_nz++]==0) { // find right-most non zero
+           if(rm_nz>nums.size()-1) { // break when non zero lies onto the end
+             rm_nz = nums.size()-1;
+             break;
+           }
+          }
+          std::swap(nums[lm_z], nums[rm_nz]);
+          i = rm_nz;  // update i to right-most nonzero since we dont need to care index that has 0
+        }
+        lm_z++; // update left-most zero
+      }
+    }
+    void moveZeroes2(vector<int>& nums) {
+      int last_non_zero = 0;
+      for(int i=0; i<nums.size(); i++) {
+        if(nums[i]!=0) std::swap(nums[last_non_zero++], nums[i]);
+      }
+    }
+};
+```
+- Check <br/> 1) How will you end up to think "reversely"?
