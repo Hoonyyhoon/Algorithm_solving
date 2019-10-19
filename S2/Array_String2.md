@@ -6,31 +6,28 @@
 - Space: O(3^N)
 - Note <br/> Condition for digit is already given(from 2-9)
 ```cpp
+const vector<string> numtostr = {"abc", "def",  "ghi", "jkl",
+                                 "mno", "pqrs", "tuv", "wxyz"};
 class Solution {
  public:
   vector<string> letterCombinations(string digits) {
-    vector<string> res;
-    if (digits.size() == 0) return res;
-
-    string str;
-    res.reserve(pow(4, digits.size()));
-    expandLetter(res, str, digits);
-    return res;
+    vector<string> ans;
+    string temp;
+    if (digits.empty()) return ans;
+    ans.reserve(pow(4, digits.size()));
+    expandLetter(digits, ans, temp);
+    return ans;
   }
-  void expandLetter(vector<string>& res, string str, string& digits) {
-    int index = str.size();
-    if (index == digits.size()) {
-      res.push_back(str);
+  void expandLetter(const string& digits, vector<string>& ans, string cur_str) {
+    int index = cur_str.size();
+    if (digits.size() <= index) {
+      ans.push_back(cur_str);
+      return;
     } else {
-      int num = digits[index] - 48 - 2;
-      for (auto& iter : number_table[num])
-        expandLetter(res, str + iter, digits);
+      for (auto& iter : numtostr[digits[index] - '0' - 2])
+        expandLetter(digits, ans, cur_str + iter);
     }
   }
-
- private:
-  vector<string> number_table = {"abc", "def",  "ghi", "jkl",
-                                 "mno", "pqrs", "tuv", "wxyz"};
 };
 ```
 - Check <br/> 1) Try to solve using queue <br/> 2) [Space-complexity](https://cs.stackexchange.com/questions/83574/does-space-complexity-analysis-usually-include-output-space)
