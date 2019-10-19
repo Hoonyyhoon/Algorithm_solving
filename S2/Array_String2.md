@@ -40,23 +40,25 @@ class Solution {
 ```cpp
 class Solution {
  public:
-  int firstMissingPositive(vector<int>& nums) {
-    int last_nonneg = nums.size() - 1;
-    for (int i = 0; (i < nums.size()) && (i < last_nonneg); i++)
-      if (nums[i] <= 0) std::swap(nums[i], nums[last_nonneg--]);
-
-    int N = last_nonneg + 1;
-    for (int i = 0; i < N; i++) {
-      int val = nums[i];
-      while (val > 0 && val <= N && val != nums[val - 1]) {
-        std::swap(nums[val - 1], nums[i]);
-        val = nums[i];
+  int firstMissingPositive(vector<int> &nums) {
+    int N = 0;
+    for (auto &iter : nums)
+      if (iter > 0) N++;
+    for (int i = 0; i < nums.size(); i++) {
+      int v = nums[i];
+      while (v >= 1 && v <= N && nums[v - 1] != v) {
+        std::swap(nums[i], nums[v - 1]);
+        v = nums[i];
       }
     }
-
-    for (int i = 0; i < N; i++)
-      if (nums[i] != i + 1) return i + 1;
-    return N + 1;
+    int ans = 1;
+    for (auto &iter : nums) {
+      if (iter == ans) ans++;
+    }
+    if (ans == N)
+      return ans++;
+    else
+      return ans;
   }
 };
 ```
