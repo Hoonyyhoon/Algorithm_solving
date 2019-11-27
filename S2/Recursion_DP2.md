@@ -2,9 +2,9 @@
 
 ## Q4. Longest Increasing Subsequence([Link](https://leetcode.com/problems/longest-increasing-subsequence/solution/)) (:o:)
 
-- Time: O(NlogN) (not sure yet)
+- Time: O(N^2)
 - Space: O(N)
-- Note <br/> 
+- Note <br/> Could you improve it to O(NlogN) time complexity? 
 ```cpp
 class Solution {
  public:
@@ -29,7 +29,7 @@ class Solution {
   }
 
   int lengthOfLIS2(vector<int>& nums) {
-    // O(NlogN)(?) O(N)
+    // O(N^2) O(N)
     if (nums.empty()) return 0;
     std::vector<int> DP(nums.size(), 1);
     std::multimap<int, int, std::greater<int>> ordered_dp;  // DP value, index
