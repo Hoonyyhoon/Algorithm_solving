@@ -13,6 +13,7 @@ class Solution {
     DP[i]: length of LIS choosing i as base
     DP[c]: max(DP[b] +1) , among b>c & nums[b] > nums[c]
     */
+    // O(N^2) O(N)
     if (nums.empty()) return 0;
     std::vector<int> DP(nums.size(), 1);
     int max_val = DP.back();
@@ -28,6 +29,7 @@ class Solution {
   }
 
   int lengthOfLIS2(vector<int>& nums) {
+    // O(NlogN)(?) O(N)
     if (nums.empty()) return 0;
     std::vector<int> DP(nums.size(), 1);
     std::multimap<int, int, std::greater<int>> ordered_dp;  // DP value, index
