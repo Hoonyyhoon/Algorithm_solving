@@ -1,5 +1,52 @@
 # Recursion & DP 2
 
+## Q2. Restore IP Addresses([Link](https://leetcode.com/problems/restore-ip-addresses/)) (:o:)
+- Time: O(N)
+- Space: O(N)
+- Note <br/>
+```cpp
+class Solution {
+ public:
+  vector<string> restoreIpAddresses(string s) {
+    std::vector<std::string> res;
+    std::string gen_str;
+    recursiveAddress(s, 0, 0, gen_str, res);
+    if (s.empty()) return res;
+    return res;
+  }
+
+  void recursiveAddress(const std::string& s, int idx, int num_dots,
+                        std::string gen_str, std::vector<std::string>& res) {
+    // break cond
+    if (idx >= s.size()) return;
+
+    // end cond
+    if (num_dots == 3) {
+      // break cond 1. left over exceeds 3 digits
+      if (s.size() - idx > 3) return;
+      std::string check_str = s.substr(idx);
+      int check_val = std::stoi(check_str);
+      // if its valid
+      if (check_str.size() >= 2 && check_str[0] == '0') return;
+      if (check_val <= 255 & check_val >= 0) res.push_back(gen_str + check_str);
+      return;
+    }
+
+    for (int i = 1; i < 4; i++) {
+      std::string check_str = s.substr(idx, i);
+      int check_val = std::stoi(check_str);
+      // if its valid
+      if (check_str.size() >= 2 && check_str[0] == '0') return;
+      if (check_val <= 255 && check_val >= 0) {
+        std::string sum_str = check_str + '.';
+        std::string new_str = gen_str + sum_str;
+        recursiveAddress(s, idx + i, num_dots + 1, new_str, res);
+      }
+    }
+  }
+};
+```
+
 ## Q4. Longest Increasing Subsequence([Link](https://leetcode.com/problems/longest-increasing-subsequence/solution/)) (:o:)
 
 - Time: O(N^2)
