@@ -47,6 +47,32 @@ class Solution {
 };
 ```
 
+## Q3. Maximum Product Subarray([Link](https://leetcode.com/problems/maximum-product-subarray/)) (:heavy_check_mark:)
+
+- Time: O(N)
+- Space: O(1)
+- Note <br/> 
+```cpp
+class Solution {
+ public:
+  int maxProduct(vector<int>& nums) {
+    int ans = nums[0];
+    int cur_max = nums[0];
+    int cur_min = nums[0];
+
+    for (int i = 1; i < nums.size(); i++) {
+      if (nums[i] < 0) std::swap(cur_max, cur_min);
+
+      cur_max = std::max(nums[i], cur_max * nums[i]);
+      cur_min = std::min(nums[i], cur_min * nums[i]);
+
+      ans = std::max(ans, cur_max);
+    }
+    return ans;
+  }
+};
+```
+
 ## Q4. Longest Increasing Subsequence([Link](https://leetcode.com/problems/longest-increasing-subsequence/solution/)) (:o:)
 
 - Time: O(N^2)
