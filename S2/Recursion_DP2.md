@@ -1,8 +1,8 @@
 # Recursion & DP 2
 
 ## Q2. Restore IP Addresses([Link](https://leetcode.com/problems/restore-ip-addresses/)) (:o:)
-- Time: O(N)
-- Space: O(N)
+- Time: O(1)
+- Space: O(1)
 - Note <br/>
 ```cpp
 class Solution {
