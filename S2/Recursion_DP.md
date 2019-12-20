@@ -1,53 +1,48 @@
 # Recursion & DP
 
-## Q2. Recover Binary Search Tree([Link](https://leetcode.com/problems/recover-binary-search-tree/)) (:o:)
+## Q2. House Robber([Link](https://leetcode.com/problems/house-robber/)) (:o:)
 
 - Time: O(N)
 - Space: O(1)
 - Note <br/> 
 ```cpp
+#include <queue>
 class Solution {
  public:
-  void recoverTree(TreeNode* root) {
-    if (!root) return;
-    std::stack<TreeNode*> stk;
-    stk.push(root);
-    TreeNode* cur = root;
-    TreeNode* prev = nullptr;
-    TreeNode* wrong = nullptr;
-    TreeNode* n_wrong = nullptr;
+  /*
+  DP[i]: max_sum at i
+  DP[0] = nums[0];
+  DP[1] = max(nums[0], nums[1]);
+  DP[i] = max(DP[i-2]+nums[i], DP[i-1])
+  */
+  int rob1(vector<int>& nums) {
+    if (nums.empty()) return 0;
+    if (nums.size() == 1) return nums[0];
+    std::queue<int> DP;
+    DP.push(nums[0]);
+    DP.push(max(nums[0], nums[1]));
 
-    while (cur->left) {
-      stk.push(cur->left);
-      cur = cur->left;
+    for (int i = 2; i < nums.size(); i++) {
+      int earlier = DP.front();
+      DP.pop();
+      DP.push(max(earlier + nums[i], DP.front()));
     }
-    while (!stk.empty()) {
-      cur = stk.top();
-      if (!prev) prev = cur;
-      // abnormal
-      if (prev->val > cur->val) {
-        if (!wrong) {
-          wrong = prev;
-          n_wrong = cur;
-        } else {
-          std::swap(wrong->val, cur->val);
-          return;
-        }
-      }
-      prev = cur;
-      stk.pop();
+    return DP.back();
+  }
+  int rob2(vector<int>& nums) {
+    if (nums.empty()) return 0;
+    if (nums.size() == 1) return nums[0];
+    if (nums.size() == 2) return max(nums[0], nums[1]);
+    int DP[3] = {0};
+    DP[0] = nums[0];
+    DP[1] = max(nums[0], nums[1]);
 
-      // if right, go right
-      if (cur->right) {
-        stk.push(cur->right);
-        cur = cur->right;
-        while (cur->left) {
-          stk.push(cur->left);
-          cur = cur->left;
-        }
-      }
+    for (int i = 2; i < nums.size(); i++) {
+      DP[2] = max(DP[0] + nums[i], DP[1]);
+      DP[0] = DP[1];
+      DP[1] = DP[2];
     }
-    std::swap(wrong->val, n_wrong->val);
+    return DP[2];
   }
 };
 ```
