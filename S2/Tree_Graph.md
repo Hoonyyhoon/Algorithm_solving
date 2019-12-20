@@ -89,3 +89,50 @@ class Solution {
   }
 };
 ```
+
+## Q3. Keys and Rooms([Link](https://leetcode.com/problems/keys-and-rooms/)) (:o:)
+
+- Time: O(N+K), N: num of rooms, K: num of keys
+- Space: O(N)
+- Note <br/> 
+
+```cpp
+// 1
+class Solution {
+ public:
+  bool canVisitAllRooms(vector<vector<int>>& rooms) {
+    std::unordered_set<int> checked_room;
+    openRoom(rooms, 0, checked_room);
+    if (checked_room.size() == rooms.size()) return true;
+    return false;
+  }
+  void openRoom(const vector<vector<int>>& rooms, int room_num,
+                std::unordered_set<int>& checked_room) {
+    if (checked_room.find(room_num) != checked_room.end()) return;
+    checked_room.insert(room_num);
+    for (int k = 0; k < rooms[room_num].size(); k++) {
+      openRoom(rooms, rooms[room_num][k], checked_room);
+    }
+  }
+};
+// 2
+class Solution {
+public:
+    bool canVisitAllRooms(vector<vector<int>>& rooms) {
+      std::unordered_set<int> checked_room;
+      std::stack<int> s_rooms;
+      s_rooms.push(0);
+      while(!s_rooms.empty()) {
+        int r_num = s_rooms.top();
+        s_rooms.pop();
+        if(checked_room.find(r_num) != checked_room.end()) continue;
+        checked_room.insert(r_num);
+        for(int key = 0; key < rooms[r_num].size(); key++) {
+          s_rooms.push(rooms[r_num][key]);
+        }
+      }
+      if(checked_room.size() == rooms.size()) return true;
+      return false;
+    }
+};
+```
