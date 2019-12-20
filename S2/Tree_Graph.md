@@ -1,6 +1,6 @@
 # Tree & Graph
 
-## Q2. Recover Binary Search Tree([Link](https://leetcode.com/problems/recover-binary-search-tree/)) (:o:)
+## Q1. Recover Binary Search Tree([Link](https://leetcode.com/problems/recover-binary-search-tree/)) (:o:)
 
 - Time: O(N)
 - Space: O(1)
@@ -57,6 +57,35 @@ class Solution {
       }
     }
     std::swap(wrong->val, n_wrong->val);
+  }
+};
+```
+
+## Q2. Diameter of Binary Tree([Link](https://leetcode.com/problems/diameter-of-binary-tree/)) (:o:)
+
+- Time: O(N)
+- Space: O(N)
+- Note <br/> 
+
+```cpp
+class Solution {
+ public:
+  int diameterOfBinaryTree(TreeNode* root) {
+    int maxDiam = 0;
+    getHeight(root, maxDiam);
+    return maxDiam;
+  }
+
+  int getHeight(TreeNode* node, int& maxDiameter) {
+    if (!node) return 0;
+    int left = 0;
+    int right = 0;
+    // height left
+    if (node->left) left = getHeight(node->left, maxDiameter);
+    // height right
+    if (node->right) right = getHeight(node->right, maxDiameter);
+    maxDiameter = std::max(maxDiameter, left + right);
+    return std::max(left + 1, right + 1);
   }
 };
 ```
