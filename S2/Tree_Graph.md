@@ -136,3 +136,30 @@ public:
     }
 };
 ```
+
+## Q4. Find the Town Judge([Link](https://leetcode.com/problems/find-the-town-judge/)) (:o:)
+
+- Time: O(N+K), N: num of people, K: num of trust pairs
+- Space: O(N)
+- Note <br/> 
+
+```cpp
+class Solution {
+ public:
+  int findJudge(int N, vector<vector<int> >& trust) {
+    std::vector<std::pair<int, int> > received_give(
+        N, std::make_pair<int, int>(0, 0));
+    for (int i = 0; i < trust.size(); i++) {
+      int trust_ = trust[i][0];
+      int trusted_ = trust[i][1];
+      received_give[trust_ - 1].second++;
+      received_give[trusted_ - 1].first++;
+    }
+    for (int i = 0; i < N; i++) {
+      if (received_give[i].first == N - 1 && received_give[i].second == 0)
+        return i + 1;
+    }
+    return -1;
+  }
+};
+```
